@@ -14,7 +14,11 @@ public class Controller {
     private double firstInput;
     private double secondInput;
     private String operator;
-    private int step;
+    private boolean resetNextInput = false;
+
+
+    private boolean equalsRepeat = false;
+    private double equalsBuffer;
 
     @FXML
     private void handleButtonClick(MouseEvent event) {
@@ -24,6 +28,7 @@ public class Controller {
         if (buttonText.matches("\\d")) {
             double number = Double.parseDouble(button.getText());
             appendNumber(number);
+            equalsRepeat = false;
         }
         else {
             handleOperation(buttonText);
@@ -33,8 +38,9 @@ public class Controller {
 
     private void appendNumber(double number) {
         String inputAppend = calculationText.getText();
-        if (inputAppend.equals("--"))   {
+        if (inputAppend.equals("--") || inputAppend.equals("+") || inputAppend.equals("-") || inputAppend.equals("*") || inputAppend.equals("/") || resetNextInput)   {
             inputAppend = "";
+            resetNextInput = false;
         }
         inputAppend += (int) number;
         calculationText.setText(inputAppend);
@@ -46,18 +52,27 @@ public class Controller {
                 calculationText.setText("--");
                 firstInput = 0;
                 secondInput = 0;
-                step = 1;
+
             }
             case "+", "-", "*", "/" -> {
                 firstInput = Double.parseDouble(calculationText.getText());
-                calculationText.setText("--");
+                calculationText.setText(buttonText);
                 operator = buttonText;
-                step = 2;
+
             }
             case "=" -> {
-                secondInput = Double.parseDouble(calculationText.getText());
-                calculationText.setText(String.valueOf(Operation.solveFunction(firstInput, secondInput, operator)));
-                step = 1;
+
+                if (equalsRepeat == false)  {
+                    secondInput = Double.parseDouble(calculationText.getText());
+                    equalsBuffer = secondInput;
+                    calculationText.setText(String.valueOf(Operation.solveFunction(firstInput, secondInput, operator)));
+                }
+                else {
+                    firstInput = Double.parseDouble(calculationText.getText());
+                    calculationText.setText(String.valueOf(Operation.solveFunction(firstInput, equalsBuffer, operator)));
+                    resetNextInput = true;
+                }
+                equalsRepeat = true;
             }
             case "%" -> {
                 String inputAppend = "0." + calculationText.getText();
