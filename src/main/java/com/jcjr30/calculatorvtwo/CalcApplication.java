@@ -15,7 +15,8 @@ public class CalcApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 300, 525);
 
 
-        scene.getStylesheets().add((getClass().getResource("style.css")).toExternalForm());
+        //scene.getStylesheets().add((getClass().getResource("default.css")).toExternalForm());
+
         Font.loadFont(getClass().getResource("fonts/dsdigital.TTF").toExternalForm(), 16);
         Font.loadFont(getClass().getResource("fonts/SourceSansPro-Semibold.otf").toExternalForm(), 16);
 

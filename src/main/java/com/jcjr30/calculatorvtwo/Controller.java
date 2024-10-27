@@ -2,7 +2,9 @@ package com.jcjr30.calculatorvtwo;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
@@ -19,9 +21,41 @@ public class Controller {
     private String operation;
     private boolean resetNextInput = false;
 
-
     private boolean equalsRepeat = false;
     private BigDecimal equalsBuffer;
+
+    @FXML
+    private GridPane gridPane;
+    @FXML
+    private ChoiceBox<String> choiceSkin;
+    @FXML
+    private ChoiceBox<String> choiceCalcType;
+
+    private static final String DEFAULT_THEME = "/com/jcjr30/calculatorvtwo/default.css";
+    private static final String LIGHT_THEME = "/com/jcjr30/calculatorvtwo/light.css";
+
+
+    @FXML
+    public void initialize() {
+        choiceCalcType.getItems().addAll("Basic", "Advanced", "Scientific");
+        choiceCalcType.setValue("Basic");
+        choiceSkin.getItems().addAll("Default", "Dark", "Light");
+        choiceSkin.setValue("Default");
+
+        switchToDefaultTheme();
+
+        choiceSkin.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("Light")) {
+               System.out.println(newValue);
+                switchToLightTheme();
+           }
+            if (newValue.equals("Default")) {
+                System.out.println(newValue);
+                switchToDefaultTheme();
+            }
+
+        });
+    }
 
 
     //Gets the text contained in the button that was clicked
@@ -35,8 +69,7 @@ public class Controller {
             BigDecimal number = BigDecimal.valueOf(Double.parseDouble(button.getText()));
             appendNumber(number);
             equalsRepeat = false;
-        }
-        else {
+        } else {
             handleOperation(buttonText);
         }
     }
@@ -44,7 +77,7 @@ public class Controller {
     //Displays numbers as they are input
     private void appendNumber(BigDecimal number) {
         String inputAppend = calculationText.getText();
-        if (inputAppend.equals("--") || inputAppend.equals("+") || inputAppend.equals("-") || inputAppend.equals("*") || inputAppend.equals("/") || resetNextInput)   {
+        if (inputAppend.equals("--") || inputAppend.equals("+") || inputAppend.equals("-") || inputAppend.equals("*") || inputAppend.equals("/") || resetNextInput) {
             inputAppend = "";
             resetNextInput = false;
         }
@@ -56,7 +89,9 @@ public class Controller {
     private void handleOperation(String buttonText) {
         switch (buttonText) {
 
-            case "C" -> {clear();}
+            case "C" -> {
+                clear();
+            }
 
             case "+", "-", "*", "/" -> {
                 operator = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
@@ -68,12 +103,11 @@ public class Controller {
             //operand and operate it on the result of the previous operation
             case "=" -> {
 
-                if (equalsRepeat == false)  {
+                if (equalsRepeat == false) {
                     operand = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
                     equalsBuffer = operand;
                     displayValue(Objects.requireNonNull(Operation.solveFunction(operator, operand, operation)).stripTrailingZeros().toPlainString());
-                }
-                else {
+                } else {
                     operator = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
                     displayValue((Objects.requireNonNull(Operation.solveFunction(operator, equalsBuffer, operation))).stripTrailingZeros().toPlainString());
                 }
@@ -82,10 +116,9 @@ public class Controller {
             }
 
             case "%" -> {
-                if (calculationText.getText().equals("--") || calculationText.getText().equals("+") || calculationText.getText().equals("-") || calculationText.getText().equals("*") || calculationText.getText().equals("/"))   {
+                if (calculationText.getText().equals("--") || calculationText.getText().equals("+") || calculationText.getText().equals("-") || calculationText.getText().equals("*") || calculationText.getText().equals("/")) {
                     clear();
-                }
-                else {
+                } else {
                     BigDecimal inputAppend = BigDecimal.valueOf(Double.parseDouble((calculationText.getText()))).stripTrailingZeros();
                     inputAppend = inputAppend.multiply(BigDecimal.valueOf(0.01).stripTrailingZeros());
                     calculationText.setText(inputAppend.toString());
@@ -94,10 +127,11 @@ public class Controller {
 
             case "<-" -> {
                 String inputAppend = calculationText.getText();
-                if (inputAppend.substring(inputAppend.length() - 1).matches("\\d"))  {
+                if (inputAppend.substring(inputAppend.length() - 1).matches("\\d")) {
                     calculationText.setText(inputAppend.substring(0, inputAppend.length() - 1));
+                } else {
+                    clear();
                 }
-                else {clear();}
             }
 
             case "." -> {
@@ -118,12 +152,46 @@ public class Controller {
     }
 
     //Method to easily display numbers
-    private void displayValue(BigDecimal value)  {
+    private void displayValue(BigDecimal value) {
         calculationText.setText(String.valueOf(value));
     }
-    private void displayValue(String value)  {
+
+    private void displayValue(String value) {
         calculationText.setText(value);
     }
 
+
+    //Theme related methods
+
+    public void switchToLightTheme() {
+        switchTheme(LIGHT_THEME);
+    }
+    public void switchToDefaultTheme()  {
+        switchTheme(DEFAULT_THEME);
+    }
+
+    private void switchTheme(String THEME) {
+        if (gridPane.getScene() != null) {
+            removeStylesheets();
+            addStylesheet(THEME);
+
+            System.out.println(THEME);
+
+            gridPane.sceneProperty().get().getStylesheets().add(getClass().getResource(THEME).toExternalForm());
+        } else {
+            gridPane.sceneProperty().addListener((observable, oldScene, newScene) -> {
+                if (newScene != null) {
+                    newScene.getStylesheets().clear();
+                    addStylesheet(THEME);
+                }
+            });
+        }
+    }
+    public void addStylesheet(String stylesheetPath) {
+        gridPane.getScene().getStylesheets().add(getClass().getResource(stylesheetPath).toExternalForm());
+    }
+    public void removeStylesheets() {
+        gridPane.getScene().getStylesheets().clear();
+    }
 }
 

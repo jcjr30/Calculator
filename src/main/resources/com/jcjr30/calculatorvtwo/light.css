@@ -1,0 +1,43 @@
+
+.gridPane {
+    -fx-background-color: #bda5a5;
+}
+
+.Pane--Screen {
+    -fx-background-color: black;
+    -fx-border-color: rgb(60,60,60);
+    -fx-border-width: 5px;
+}
+.Pane--Screen > Text  {
+    -fx-font-family: DS-Digital;
+    -fx-font-size: 50px;
+    -fx-fill: white;
+}
+
+.numberButton {
+    -fx-font-family: "Source Sans Pro Light";
+}
+.operateButton {
+    -fx-font-family: "Source Sans Pro Semibold";
+    -fx-color: #36aeb8;
+}
+.operateButton > Text  {
+    -fx-color: white;
+}
+.numberButton:hover   {
+
+}
+.operateButton:hover {
+    -fx-color:derive(#36aeb8, 30%);
+}
+.gridPane > Button {
+    -fx-font-size:36px;
+    -fx-font-smoothing-type: lcd;
+
+    -fx-border-color: rgb(60,60,60);
+    -fx-border-width: 3px;
+    -fx-effect: dropshadow(gaussian, black, 6, 0, 0, 0);
+
+    -fx-background-insets:0; /* Remove background insets */
+    -fx-padding: 0;
+}
