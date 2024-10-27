@@ -37,3 +37,6 @@ build/
 ### Mac OS ###
 .DS_Store
 /src/main/resources/com/jcjr30/calculatorvtwo/fonts/
+/src/main/resources/META-INF/MANIFEST.MF
+/theme.json
+/out/artifacts/CalculatorV2_jar/CalculatorV2.jar
