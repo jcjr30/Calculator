@@ -126,7 +126,7 @@ public class Controller {
             //operand and operate it on the result of the previous operation
             case "=" -> {
 
-                if (equalsRepeat == false) {
+                if (!equalsRepeat) {
                     operand = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
                     equalsBuffer = operand;
                     displayValue(Objects.requireNonNull(Operation.solveFunction(operator, operand, operation)).stripTrailingZeros().toPlainString());
