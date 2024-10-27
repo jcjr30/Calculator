@@ -98,7 +98,7 @@
          </font></Button>
       <Button fx:id="sevenButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleButtonClick" prefHeight="65.0" prefWidth="65.0" styleClass="numberButton" text="7" GridPane.rowIndex="3">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font size="24.0" />
          </font></Button>
       <Button fx:id="divideButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleButtonClick" prefHeight="65.0" prefWidth="65.0" styleClass="operateButton" text="/" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <font>

@@ -1,5 +1,8 @@
 package com.jcjr30.calculatorvtwo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -7,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -31,19 +36,45 @@ public class Controller {
     @FXML
     private ChoiceBox<String> choiceCalcType;
 
-    private static final String DEFAULT_THEME = "/com/jcjr30/calculatorvtwo/default.css";
-    private static final String LIGHT_THEME = "/com/jcjr30/calculatorvtwo/light.css";
+    private static final String DEFAULT_THEME = "/com/jcjr30/calculatorvtwo/css/default.css";
+    private static final String LIGHT_THEME = "/com/jcjr30/calculatorvtwo/css/light.css";
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final File file = new File("theme.json");
 
 
+    //Initialize ChoiceBox's and Theme
     @FXML
     public void initialize() {
         choiceCalcType.getItems().addAll("Basic", "Advanced", "Scientific");
         choiceCalcType.setValue("Basic");
+
         choiceSkin.getItems().addAll("Default", "Dark", "Light");
-        choiceSkin.setValue("Default");
 
-        switchToDefaultTheme();
 
+        //Switch to previously stored theme
+        try {
+            if (file.exists()) {
+                JsonNode node = objectMapper.readTree(file);
+                String initTheme = node.asText();
+                switchTheme(initTheme);
+
+                switch (initTheme) {
+                    case DEFAULT_THEME -> {
+                        choiceSkin.setValue("Default");
+                    }
+                    case LIGHT_THEME -> {
+                        choiceSkin.setValue("Light");
+                    }
+                }
+            } else {
+                switchTheme(DEFAULT_THEME);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Add listener to the 'skin' ChoiceBox
         choiceSkin.getSelectionModel().selectedItemProperty().addListener((_, _, newValue) -> {
             if (newValue.equals("Light")) {
                System.out.println(newValue);
@@ -53,7 +84,6 @@ public class Controller {
                 System.out.println(newValue);
                 switchToDefaultTheme();
             }
-
         });
     }
 
@@ -185,6 +215,14 @@ public class Controller {
                     addStylesheet(THEME);
                 }
             });
+        }
+
+
+        try {
+            objectMapper.writeValue(file, THEME);
+            System.out.println("File saved to: " + file.getAbsolutePath());
+        }   catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
     public void addStylesheet(String stylesheetPath) {
