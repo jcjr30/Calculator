@@ -6,8 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.Arrays;
+import java.util.Objects;
 
 public class Controller {
 
@@ -57,9 +56,7 @@ public class Controller {
     private void handleOperation(String buttonText) {
         switch (buttonText) {
 
-            case "C" -> {
-                clear();
-            }
+            case "C" -> {clear();}
 
             case "+", "-", "*", "/" -> {
                 operator = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
@@ -74,11 +71,11 @@ public class Controller {
                 if (equalsRepeat == false)  {
                     operand = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
                     equalsBuffer = operand;
-                    displayValue(Operation.solveFunction(operator, operand, operation).stripTrailingZeros().toPlainString());
+                    displayValue(Objects.requireNonNull(Operation.solveFunction(operator, operand, operation)).stripTrailingZeros().toPlainString());
                 }
                 else {
                     operator = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
-                    displayValue((Operation.solveFunction(operator, equalsBuffer, operation)).stripTrailingZeros().toPlainString());
+                    displayValue((Objects.requireNonNull(Operation.solveFunction(operator, equalsBuffer, operation))).stripTrailingZeros().toPlainString());
                 }
                 resetNextInput = true;
                 equalsRepeat = true;
