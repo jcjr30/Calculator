@@ -3,11 +3,15 @@ package com.jcjr30.calculatorvtwo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,21 +39,26 @@ public class Controller {
     @FXML
     private ChoiceBox<String> choiceCalcType;
 
+
     private static final String DEFAULT_THEME = "/com/jcjr30/calculatorvtwo/css/default.css";
     private static final String LIGHT_THEME = "/com/jcjr30/calculatorvtwo/css/light.css";
+
+    private static final String BASIC_LAYOUT = "fxml/basic-layout.fxml";
+    private static final String SCIENTIFIC_LAYOUT = "fxml/scientific-layout.fxml";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final File file = new File("theme.json");
 
+    private Stage stage;
+    private boolean initializing = false;
 
     //Initialize ChoiceBox's and Theme
     @FXML
     public void initialize() {
-        choiceCalcType.getItems().addAll("Basic", "Advanced", "Scientific");
-        choiceCalcType.setValue("Basic");
+        if (initializing) return;
+        initializing = true;
 
         choiceSkin.getItems().addAll("Default", "Dark", "Light");
-
 
         //Switch to previously stored theme
         try {
@@ -73,13 +82,47 @@ public class Controller {
         choiceSkin.getSelectionModel().selectedItemProperty().addListener((_, _, newValue) -> {
             if (newValue.equals("Light")) {
                System.out.println(newValue);
-                switchToLightTheme();
+                switchTheme(LIGHT_THEME);
            }
             if (newValue.equals("Default")) {
                 System.out.println(newValue);
-                switchToDefaultTheme();
+                switchTheme(DEFAULT_THEME);
             }
         });
+
+        choiceCalcType.getItems().addAll("Basic", "Advanced", "Scientific");
+        //choiceCalcType.setValue("Basic");
+        choiceCalcType.getSelectionModel().selectedItemProperty().addListener((_, oldValue, newValue) -> {
+
+            if (newValue.equals("Basic")) {
+                loadLayout(BASIC_LAYOUT);
+            }
+            else if (newValue.equals("Scientific")) {
+                loadLayout(SCIENTIFIC_LAYOUT);
+            }
+        });
+        initializing = false;
+    }
+
+    private void loadLayout(String fxmlFile) {
+        Stage stage;
+        Parent root;
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+            GridPane newLayout = fxmlLoader.load();
+
+
+            stage = (Stage) calculationText.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource(fxmlFile));
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -193,14 +236,6 @@ public class Controller {
 
 
     //Theme related methods
-
-    public void switchToLightTheme() {
-        switchTheme(LIGHT_THEME);
-    }
-    public void switchToDefaultTheme()  {
-        switchTheme(DEFAULT_THEME);
-    }
-
     private void switchTheme(String THEME) {
         if (gridPane.getScene() != null) {
             removeStylesheets();
@@ -231,6 +266,10 @@ public class Controller {
     }
     public void removeStylesheets() {
         gridPane.getScene().getStylesheets().clear();
+    }
+
+    public void setStage(Stage stage)  {
+        this.stage = stage;
     }
 }
 
