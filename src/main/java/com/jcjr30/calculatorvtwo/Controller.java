@@ -1,6 +1,5 @@
 package com.jcjr30.calculatorvtwo;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
@@ -60,12 +59,8 @@ public class Controller {
                 switchTheme(initTheme);
 
                 switch (initTheme) {
-                    case DEFAULT_THEME -> {
-                        choiceSkin.setValue("Default");
-                    }
-                    case LIGHT_THEME -> {
-                        choiceSkin.setValue("Light");
-                    }
+                    case DEFAULT_THEME -> {choiceSkin.setValue("Default");}
+                    case LIGHT_THEME -> {choiceSkin.setValue("Light");}
                 }
             } else {
                 switchTheme(DEFAULT_THEME);
@@ -119,9 +114,7 @@ public class Controller {
     private void handleOperation(String buttonText) {
         switch (buttonText) {
 
-            case "C" -> {
-                clear();
-            }
+            case "C" -> {clear();}
 
             case "+", "-", "*", "/" -> {
                 operator = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
@@ -151,13 +144,13 @@ public class Controller {
                 } else {
                     BigDecimal inputAppend = BigDecimal.valueOf(Double.parseDouble((calculationText.getText()))).stripTrailingZeros();
                     inputAppend = inputAppend.multiply(BigDecimal.valueOf(0.01).stripTrailingZeros());
-                    calculationText.setText(inputAppend.toString());
+                    displayValue(inputAppend);
                 }
             }
 
             case "<-" -> {
                 String inputAppend = calculationText.getText();
-                if (inputAppend.substring(inputAppend.length() - 1).matches("\\d")) {
+                if (inputAppend.substring(inputAppend.length() - 1).matches("[\\d.]")) {
                     calculationText.setText(inputAppend.substring(0, inputAppend.length() - 1));
                 } else {
                     clear();
@@ -166,7 +159,15 @@ public class Controller {
 
             case "." -> {
                 String inputAppend = calculationText.getText();
-                if (!inputAppend.contains(".")) {
+
+                //Checks if input is not a number and does not already contain a '.'
+                //if true, set Text to "0."
+                if (inputAppend.equals("--") || inputAppend.equals("+") || inputAppend.equals("-") || inputAppend.equals("*") || inputAppend.equals("/")) {
+                    calculationText.setText("0.");
+                }
+                //If input is a number and does not already contain a '.'
+                //then append a '.' to the current Text
+                else if (!inputAppend.contains(".")) {
                     inputAppend += ".";
                     calculationText.setText(inputAppend);
                 }
@@ -183,7 +184,7 @@ public class Controller {
 
     //Method to easily display numbers
     private void displayValue(BigDecimal value) {
-        calculationText.setText(String.valueOf(value));
+        calculationText.setText(value.stripTrailingZeros().toPlainString());
     }
 
     private void displayValue(String value) {
