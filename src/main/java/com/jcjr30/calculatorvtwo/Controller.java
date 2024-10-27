@@ -44,7 +44,7 @@ public class Controller {
 
         switchToDefaultTheme();
 
-        choiceSkin.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        choiceSkin.getSelectionModel().selectedItemProperty().addListener((_, _, newValue) -> {
             if (newValue.equals("Light")) {
                System.out.println(newValue);
                 switchToLightTheme();
@@ -179,7 +179,7 @@ public class Controller {
 
             gridPane.sceneProperty().get().getStylesheets().add(getClass().getResource(THEME).toExternalForm());
         } else {
-            gridPane.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            gridPane.sceneProperty().addListener((_, _, newScene) -> {
                 if (newScene != null) {
                     newScene.getStylesheets().clear();
                     addStylesheet(THEME);
