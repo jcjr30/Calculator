@@ -39,9 +39,6 @@ public class Controller {
     @FXML
     private ChoiceBox<String> choiceCalcType;
 
-    @FXML
-    private Button radicalButton;
-
 
     private static final String DEFAULT_THEME = "/com/jcjr30/calculatorvtwo/css/default.css";
     private static final String LIGHT_THEME = "/com/jcjr30/calculatorvtwo/css/light.css";

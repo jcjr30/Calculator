@@ -40,3 +40,4 @@ build/
 /src/main/resources/META-INF/MANIFEST.MF
 /theme.json
 /out/artifacts/CalculatorV2_jar/CalculatorV2.jar
+/calcType.json

@@ -23,8 +23,4 @@ public class Main {
 
         CalcApplication.launch(CalcApplication.class, args);
     }
-
-    public static String getInitialFxml()  {
-        return initialFxml;
-    }
 }
