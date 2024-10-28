@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Controller {
@@ -54,7 +53,6 @@ public class Controller {
 
     private boolean initializing = false;
     private int count = 0;
-    private boolean listenForExponent = false;
 
     //Initialize ChoiceBox's and Theme
     @FXML
@@ -257,9 +255,6 @@ public class Controller {
                     calculationText.setText(inputAppend + "^");
                     operator = BigDecimal.valueOf(Double.parseDouble(inputAppend));
                     operation = "^x";
-
-                    listenForExponent = true;
-
                 }
             }
         }
