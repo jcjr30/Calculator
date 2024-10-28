@@ -39,6 +39,9 @@ public class Controller {
     @FXML
     private ChoiceBox<String> choiceCalcType;
 
+    @FXML
+    private Button radicalButton;
+
 
     private static final String DEFAULT_THEME = "/com/jcjr30/calculatorvtwo/css/default.css";
     private static final String LIGHT_THEME = "/com/jcjr30/calculatorvtwo/css/light.css";
@@ -47,10 +50,11 @@ public class Controller {
     private static final String SCIENTIFIC_LAYOUT = "fxml/scientific-layout.fxml";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final File file = new File("theme.json");
+    private final File themeFile = new File("theme.json");
+    private final File layoutFile = new File("calcType.json");
 
-    private Stage stage;
     private boolean initializing = false;
+    private int count = 0;
 
     //Initialize ChoiceBox's and Theme
     @FXML
@@ -62,9 +66,9 @@ public class Controller {
 
         //Switch to previously stored theme
         try {
-            if (file.exists()) {
-                JsonNode node = objectMapper.readTree(file);
-                String initTheme = node.asText();
+            if (themeFile.exists()) {
+                JsonNode nodeTheme = objectMapper.readTree(themeFile);
+                String initTheme = nodeTheme.asText();
                 switchTheme(initTheme);
 
                 switch (initTheme) {
@@ -91,14 +95,24 @@ public class Controller {
         });
 
         choiceCalcType.getItems().addAll("Basic", "Advanced", "Scientific");
-        //choiceCalcType.setValue("Basic");
+        choiceCalcType.setValue(ReadWrite.fxmlPathToLayout());
         choiceCalcType.getSelectionModel().selectedItemProperty().addListener((_, oldValue, newValue) -> {
 
-            if (newValue.equals("Basic")) {
-                loadLayout(BASIC_LAYOUT);
+            try {
+                ReadWrite.writeLayoutJson(newValue, layoutFile);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-            else if (newValue.equals("Scientific")) {
-                loadLayout(SCIENTIFIC_LAYOUT);
+
+
+            if (oldValue != null) {
+                if (newValue.equals("Basic") && !oldValue.equals("Basic")) {
+                    CalcApplication.setInitLayout("/fxml/basic-layout.fxml");
+                    loadLayout(BASIC_LAYOUT);
+                } else if (newValue.equals("Scientific") && !oldValue.equals("Scientific")) {
+                    CalcApplication.setInitLayout("/fxml/scientific-layout.fxml");
+                    loadLayout(SCIENTIFIC_LAYOUT);
+                }
             }
         });
         initializing = false;
@@ -109,16 +123,15 @@ public class Controller {
         Parent root;
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-            GridPane newLayout = fxmlLoader.load();
 
-
-            stage = (Stage) calculationText.getScene().getWindow();
+            stage = (Stage) gridPane.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource(fxmlFile));
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+
+            //choiceBoxSilentSet("Basic");
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -252,24 +265,16 @@ public class Controller {
                 }
             });
         }
-
-
-        try {
-            objectMapper.writeValue(file, THEME);
-            System.out.println("File saved to: " + file.getAbsolutePath());
-        }   catch (IOException e) {
-            throw new RuntimeException(e);
+        if (count > 0) {
+            ReadWrite.writeJson(themeFile, THEME);
         }
+        count++;
     }
     public void addStylesheet(String stylesheetPath) {
         gridPane.getScene().getStylesheets().add(getClass().getResource(stylesheetPath).toExternalForm());
     }
     public void removeStylesheets() {
         gridPane.getScene().getStylesheets().clear();
-    }
-
-    public void setStage(Stage stage)  {
-        this.stage = stage;
     }
 }
 
