@@ -60,6 +60,9 @@ public class Controller {
         if (initializing) return;
         initializing = true;
 
+        if (!themeFile.exists()) {switchTheme(DEFAULT_THEME);}
+        if (!layoutFile.exists()) {ReadWrite.writeJson(layoutFile, "/fxml/scientific-layout.fxml");}
+
         choiceSkin.getItems().addAll("Default", "Dark", "Light");
 
         //Switch to previously stored theme

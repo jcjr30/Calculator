@@ -15,11 +15,16 @@ public class Main {
         final ObjectMapper mapper = new ObjectMapper();
         final File layoutFile = new File("calcType.json");
 
-        JsonNode node = mapper.readTree(layoutFile);
-        String layout = node.asText();
-        CalcApplication.setInitLayout(layout);
-
-        initialFxml = layout;
+        if (layoutFile.exists()) {
+            JsonNode node = mapper.readTree(layoutFile);
+            String layout = node.asText();
+            CalcApplication.setInitLayout(layout);
+            initialFxml = layout;
+        }
+        else {
+            initialFxml = "/fxml/basic-layout.fxml";
+            CalcApplication.setInitLayout(initialFxml);
+        }
 
         CalcApplication.launch(CalcApplication.class, args);
     }
