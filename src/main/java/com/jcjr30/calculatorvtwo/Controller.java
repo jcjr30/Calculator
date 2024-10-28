@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Controller {
@@ -52,6 +54,7 @@ public class Controller {
 
     private boolean initializing = false;
     private int count = 0;
+    private boolean listenForExponent = false;
 
     //Initialize ChoiceBox's and Theme
     @FXML
@@ -178,7 +181,12 @@ public class Controller {
             //The first time '=' is pressed it acts as expected, but further presses take the original
             //operand and operate it on the result of the previous operation
             case "=" -> {
-
+                if (calculationText.getText().contains("^")) {
+                    String [] expoParser = calculationText.getText().split("\\^");
+                    operand = BigDecimal.valueOf(Double.parseDouble(expoParser[1]));
+                    displayValue(Objects.requireNonNull(Operation.solveFunction(operator, operand, operation)));
+                    break;
+                }
                 if (!equalsRepeat) {
                     operand = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
                     equalsBuffer = operand;
@@ -198,6 +206,14 @@ public class Controller {
                     BigDecimal inputAppend = BigDecimal.valueOf(Double.parseDouble((calculationText.getText()))).stripTrailingZeros();
                     inputAppend = inputAppend.multiply(BigDecimal.valueOf(0.01).stripTrailingZeros());
                     displayValue(inputAppend);
+                }
+            }
+
+            case "(-)" -> {
+                String inputAppend = calculationText.getText();
+                if (!inputAppend.equals("--") && !inputAppend.equals("+") && !inputAppend.equals("-") && !inputAppend.equals("*") && !inputAppend.equals("/")) {
+                    BigDecimal negOp = BigDecimal.valueOf((Double.parseDouble(calculationText.getText()) * -1));
+                    displayValue(negOp);
                 }
             }
 
@@ -223,6 +239,27 @@ public class Controller {
                 else if (!inputAppend.contains(".")) {
                     inputAppend += ".";
                     calculationText.setText(inputAppend);
+                }
+            }
+            case "√" -> {
+                String inputAppend = calculationText.getText();
+                System.out.println(inputAppend);
+                if (!inputAppend.equals("--") && !inputAppend.equals("+") && !inputAppend.equals("-") && !inputAppend.equals("*") && !inputAppend.equals("/")) {
+                   BigDecimal pow = BigDecimal.valueOf(Double.parseDouble(calculationText.getText()));
+                   String result = pow.sqrt(new MathContext(7)).stripTrailingZeros().toPlainString();
+                   displayValue(result);
+                }
+            }
+            case "^x" -> {
+                String inputAppend = calculationText.getText();
+
+                if (!inputAppend.equals("--") && !inputAppend.equals("+") && !inputAppend.equals("-") && !inputAppend.equals("*")) {
+                    calculationText.setText(inputAppend + "^");
+                    operator = BigDecimal.valueOf(Double.parseDouble(inputAppend));
+                    operation = "^x";
+
+                    listenForExponent = true;
+
                 }
             }
         }
