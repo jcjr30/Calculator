@@ -41,3 +41,6 @@
     -fx-background-insets:0; /* Remove background insets */
     -fx-padding: 0;
 }
+.scientificButton {
+    -fx-font-family: "Source Sans Pro Semibold";
+}
