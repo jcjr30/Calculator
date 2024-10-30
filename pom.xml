@@ -64,6 +64,7 @@
     </dependencies>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -149,23 +150,18 @@
                             <headerType>gui</headerType>
                             <outfile>target/CalculatorV2.exe</outfile>
                             <jar>target/${project.artifactId}-${project.version}.jar</jar>
-                            <!-- if <dontWrapJar>true</dontWrapJar> change to this conf <jar>${project.artifactId}-${project.version}.jar</jar> -->
-                            <dontWrapJar>false</dontWrapJar>
                             <errTitle>Error in launch4j plugin</errTitle>
                             <classPath>
                                 <mainClass>com.jcjr30.calculatorvtwo.Main</mainClass>
                             </classPath>
 
                             <jre>
-                                <minVersion>11</minVersion>
-                                <maxVersion>23</maxVersion>
-                                <initialHeapSize>512</initialHeapSize>
-                                <maxHeapSize>1024</maxHeapSize>
+                                <minVersion>8</minVersion>
                             </jre>
                             <versionInfo>
                                 <fileVersion>1.0.0.0</fileVersion>
                                 <txtFileVersion>1.0.0.0</txtFileVersion>
-                                <fileDescription>des</fileDescription>
+                                <fileDescription>${project.name}</fileDescription>
                                 <copyright>Copyright (c) 2014 </copyright>
                                 <companyName>comp</companyName>
                                 <productVersion>3.0.0.0</productVersion>
@@ -179,8 +175,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
     </plugins>
     </build>
 </project>
