@@ -22,6 +22,8 @@ CalculatorV2 is a JavaFX-based calculator application that supports basic and sc
 
 <b>Themes:</b> Choose between different themes to customize the appearance.
 
+<b>Persistent:</b> Your chosen theme and layout will save and load automatically.
+
 <b>Keyboard Input Support:</b> <br>
 shift + 5 -> % <br>
 shift + - -> Negative <br>
@@ -31,9 +33,11 @@ X -> Exponent <br>
 Esc -> Clear <br>
 Enter -> Equals
 
-Uses Maven for building the project.
+<b>Reccomended Fonts:</b> (Uses system font if not installed) <br>
+- <a href="https://www.dafont.com/ds-digital.font">DS-Digital</a> (Included in repo, Original Author: Dusit Supasawat)
+- Adobe Source Sans Pro (Light/Semi-Bold)
 
-<h2>Steps:</h2>
+<h2>Steps to run:</h2>
 
 <h3>Clone the repository:</h3>
 
@@ -51,7 +55,9 @@ Uses Maven for building the project.
 
 <code>mvn javafx:run </code>
 
-or run the generated .exe file
+or run the generated .exe file (target/CalculatorV2.exe)
+
+The .exe is portable, it will generate a "data" folder in its' directory.
 
 <br>
 This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3.
