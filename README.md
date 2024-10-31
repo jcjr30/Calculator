@@ -2,11 +2,11 @@
 
 <div style="text-align:center">
   <img width="10%">
-<img style="border:10px solid black;" src="img/defaultModeCalc.png" alt="Default Calc Image" width="22%"> </img>
+<img src="img/defaultModeCalc.png" alt="Default Calc Image" width="22%"> </img>
   <img width="5%">
-<img style="border:10px solid black;" src="img/darkModeCalc.png" alt="Dark Calc Image" width="22%"> </img>
+<img src="img/darkModeCalc.png" alt="Dark Calc Image" width="22%"> </img>
   <img width="5%">
-<img style="border:10px solid black;" src="img/lightModeCalc.png" alt="Light Calc Image" width="22%"> </img>
+<img src="img/lightModeCalc.png" alt="Light Calc Image" width="22%"> </img>
   <img width="10%">
 </div>
 
