@@ -1,5 +1,11 @@
 <h1>CalculatorV2</h1>
 
+<div class="images--container" style="text-align:center">
+<img class="images" src="img/defaultModeCalc.png" alt="Default Calc Image" height="450" style="border: 10px solid black"> </img>
+<img class="images" src="img/darkModeCalc.png" alt="Dark Calc Image" height="450"> </img>
+<img class="images" src="img/lightModeCalc.png" alt="Light Calc Image" height="450"> </img>
+</div>
+
 <h2>Overview</h2>
 
 CalculatorV2 is a JavaFX-based calculator application that supports basic and scientific calculations. The project is structured to offer a clean, responsive user interface with themes and two seperate layouts.
@@ -43,4 +49,15 @@ Uses Maven for building the project.
 
 or run the generated .exe file
 
+<br>
 This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3.
+<style>
+.images--container {
+display:flex;
+gap:10px;
+}
+.images {
+border: 10px solid black;
+padding-top:-40px;
+}
+</style>
