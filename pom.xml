@@ -170,7 +170,7 @@
                                 <internalName>CalculatorV2</internalName>
                                 <originalFilename>CalculatorV2.exe</originalFilename>
                             </versionInfo>
-                            <icon>src/main/resources/com/jcjr30/calculatorvtwo/project.ico</icon>
+                            <icon>src/main/resources/com/jcjr30/calculatorvtwo/img/CalculatorV2-icon.ico</icon>
                         </configuration>
                     </execution>
                 </executions>

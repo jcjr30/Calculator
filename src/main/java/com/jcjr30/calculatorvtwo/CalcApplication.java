@@ -3,10 +3,12 @@ package com.jcjr30.calculatorvtwo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class CalcApplication extends Application {
 
@@ -34,6 +36,12 @@ public class CalcApplication extends Application {
         stage.setTitle("Calculator");
         stage.setScene(scene);
         stage.show();
+
+        try {
+            stage.getIcons().add(new Image(CalcApplication.class.getResourceAsStream("img/CalculatorV2-icon.png")));
+        } catch (NullPointerException e) {
+            System.out.println("Icon not found");
+        }
     }
 
     public static void setInitLayout(String layout) {
