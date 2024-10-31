@@ -98,6 +98,7 @@ public class Controller {
 
     private static final String DEFAULT_THEME = "/com/jcjr30/calculatorvtwo/css/default.css";
     private static final String LIGHT_THEME = "/com/jcjr30/calculatorvtwo/css/light.css";
+    private static final String DARK_THEME = "/com/jcjr30/calculatorvtwo/css/dark.css";
     private static final String BASIC_LAYOUT = "fxml/basic-layout.fxml";
     private static final String SCIENTIFIC_LAYOUT = "fxml/scientific-layout.fxml";
 
@@ -117,7 +118,7 @@ public class Controller {
         if (!themeFile.exists()) {switchTheme(DEFAULT_THEME);}
         if (!layoutFile.exists()) {ReadWrite.writeJson(layoutFile, "/fxml/basic-layout.fxml");}
 
-        choiceSkin.getItems().addAll("Default", "Dark", "Light");
+        choiceSkin.getItems().addAll("Light", "Default", "Dark");
 
         //Switch to previously stored theme
         try {
@@ -129,6 +130,7 @@ public class Controller {
                 switch (initTheme) {
                     case DEFAULT_THEME -> choiceSkin.setValue("Default");
                     case LIGHT_THEME -> choiceSkin.setValue("Light");
+                    case DARK_THEME -> choiceSkin.setValue("Dark");
                 }
             } else {
                 switchTheme(DEFAULT_THEME);
@@ -147,9 +149,13 @@ public class Controller {
                 System.out.println(newValue);
                 switchTheme(DEFAULT_THEME);
             }
+            if (newValue.equals("Dark")) {
+                System.out.println(newValue);
+                switchTheme(DARK_THEME);
+            }
         });
 
-        choiceCalcType.getItems().addAll("Basic", "Advanced", "Scientific");
+        choiceCalcType.getItems().addAll("Basic", "Scientific");
         choiceCalcType.setValue(ReadWrite.fxmlPathToLayout());
         choiceCalcType.getSelectionModel().selectedItemProperty().addListener((_, oldValue, newValue) -> {
 
