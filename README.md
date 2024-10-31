@@ -34,4 +34,4 @@ Uses Maven for building the project.
 
 or run the generated .exe file
 
-This project is licensed under the ___ License.
+This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3.
