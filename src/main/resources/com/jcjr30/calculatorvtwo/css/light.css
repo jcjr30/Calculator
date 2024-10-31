@@ -15,20 +15,20 @@ ChoiceBox {
     -fx-border-width: 5px;
 }
 .Pane--Screen > Text  {
-    -fx-font-family: DS-Digital;
+    -fx-font-family: DS-Digital, System;
     -fx-font-size: 50px;
     -fx-fill: white;
 }
 
 .numberButton {
-    -fx-font-family: "Source Sans Pro Light";
+    -fx-font-family: "Source Sans Pro Light", System;
 }
 .operateButton {
-    -fx-font-family: "Source Sans Pro Semibold";
+    -fx-font-family: "Source Sans Pro Semibold", System;
     -fx-color: #36aeb8;
 }
 .scientificButton {
-    -fx-font-family: "Source Sans Pro Semibold";
+    -fx-font-family: "Source Sans Pro Semibold", System;
 }
 
 .numberButton:hover   {

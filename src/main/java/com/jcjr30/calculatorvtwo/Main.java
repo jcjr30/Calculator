@@ -8,11 +8,7 @@ import java.io.IOException;
 
 public class Main {
 
-
-    private static String initialFxml;
-
     public static void main(String[] args) throws IOException {
-
         final ObjectMapper mapper = new ObjectMapper();
         final File layoutFile = new File("data/calcType.json");
 
@@ -20,10 +16,8 @@ public class Main {
             JsonNode node = mapper.readTree(layoutFile);
             String layout = node.asText();
             CalcApplication.setInitLayout(layout);
-            initialFxml = layout;
         } else {
-            initialFxml = "/fxml/basic-layout.fxml";
-            CalcApplication.setInitLayout(initialFxml);
+            CalcApplication.setInitLayout("/fxml/basic-layout.fxml");
         }
 
         CalcApplication.launch(CalcApplication.class, args);

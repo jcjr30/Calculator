@@ -158,11 +158,11 @@ public class Controller {
         });
 
         choiceCalcType.getItems().addAll("Basic", "Scientific");
-        choiceCalcType.setValue(ReadWrite.fxmlPathToLayout());
+        choiceCalcType.setValue(ReadWrite.fxmlPathToChoiceBoxItem());
         choiceCalcType.getSelectionModel().selectedItemProperty().addListener((_, oldValue, newValue) -> {
 
             try {
-                ReadWrite.writeLayoutJson(newValue, layoutFile);
+                ReadWrite.writeLayoutJsonFromChoiceBoxItem(newValue, layoutFile);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -390,7 +390,7 @@ public class Controller {
 
                 if (!inputAppend.equals("--") && !inputAppend.equals("+") && !inputAppend.equals("-") && !inputAppend.equals("*") && !inputAppend.contains("^")) {
                     double doubleInputAppend = Math.log(Double.parseDouble(calculationText.getText()));
-                    displayValue(BigDecimal.valueOf(doubleInputAppend).stripTrailingZeros().toPlainString());
+                    displayValue(BigDecimal.valueOf(doubleInputAppend));
                     resetNextInput = false;
                 }
             }

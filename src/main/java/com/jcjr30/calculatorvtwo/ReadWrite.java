@@ -25,7 +25,7 @@ public class ReadWrite {
         }
     }
 
-    public static String fxmlPathToLayout()  {
+    public static String fxmlPathToChoiceBoxItem()  {
 
         if (CalcApplication.initLayout.equals(BASIC_LAYOUT)) {
             return "Basic";
@@ -36,12 +36,12 @@ public class ReadWrite {
         return "error";
     }
 
-    public static void writeLayoutJson(String currentLayout, File file) throws IOException {
+    public static void writeLayoutJsonFromChoiceBoxItem(String layout, File file) throws IOException {
 
-        if (currentLayout.equals("Basic")) {
+        if (layout.equals("Basic")) {
             writeJson(file, BASIC_LAYOUT);
         }
-        if (currentLayout.equals("Scientific")) {
+        if (layout.equals("Scientific")) {
             writeJson(file, SCIENTIFIC_LAYOUT);
         }
     }
