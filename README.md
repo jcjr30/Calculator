@@ -1,9 +1,13 @@
 <h1>CalculatorV2</h1>
 
-<div style="text-align:center; display:flex; gap:10px">
-<img style="border:10px solid black;" src="img/defaultModeCalc.png" alt="Default Calc Image" height="450"> </img>
-<img style="border:10px solid black;" src="img/darkModeCalc.png" alt="Dark Calc Image" height="450"> </img>
-<img style="border:10px solid black;" src="img/lightModeCalc.png" alt="Light Calc Image" height="450"> </img>
+<div style="text-align:center">
+  <img width="10%">
+<img style="border:10px solid black;" src="img/defaultModeCalc.png" alt="Default Calc Image" width="22%"> </img>
+  <img width="5%">
+<img style="border:10px solid black;" src="img/darkModeCalc.png" alt="Dark Calc Image" width="22%"> </img>
+  <img width="5%">
+<img style="border:10px solid black;" src="img/lightModeCalc.png" alt="Light Calc Image" width="22%"> </img>
+  <img width="10%">
 </div>
 
 <h2>Overview</h2>
