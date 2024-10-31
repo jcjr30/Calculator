@@ -12,9 +12,11 @@ public class CalcApplication extends Application {
 
     public static String initLayout;
 
+    private static FXMLLoader fxmlLoader;
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CalcApplication.class.getResource("/com/jcjr30/calculatorvtwo" + initLayout));
+        fxmlLoader = new FXMLLoader(CalcApplication.class.getResource("/com/jcjr30/calculatorvtwo" + initLayout));
         Scene scene;
 
         if (initLayout.equals("/fxml/scientific-layout.fxml"))  {
