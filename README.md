@@ -12,6 +12,15 @@ CalculatorV2 is a JavaFX-based calculator application that supports basic and sc
 
 <b>Themes:</b> Choose between different themes to customize the appearance.
 
+<b>Keyboard Input Support:</b> <br>
+shift + 5 -> % <br>
+shift + - -> Negative <br>
+N -> Natural Logarithm <br>
+L -> Logarithm <br>
+X -> Exponent <br>
+Esc -> Clear <br>
+Enter -> Equals
+
 Uses Maven for building the project.
 
 <h2>Steps:</h2>
