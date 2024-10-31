@@ -115,7 +115,7 @@ public class Controller {
         if (initializing) return;
         initializing = true;
 
-        CreateFolder.createFolder();
+        ReadWrite.createFolder();
 
         if (!layoutFile.exists()) {ReadWrite.writeJson(layoutFile, "/fxml/basic-layout.fxml");}
 
