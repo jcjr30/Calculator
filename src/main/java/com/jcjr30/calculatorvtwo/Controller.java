@@ -115,7 +115,8 @@ public class Controller {
         if (initializing) return;
         initializing = true;
 
-        if (!themeFile.exists()) {switchTheme(DEFAULT_THEME);}
+        CreateFolder.createFolder();
+
         if (!layoutFile.exists()) {ReadWrite.writeJson(layoutFile, "/fxml/basic-layout.fxml");}
 
         choiceSkin.getItems().addAll("Light", "Default", "Dark");
@@ -134,6 +135,7 @@ public class Controller {
                 }
             } else {
                 switchTheme(DEFAULT_THEME);
+                choiceSkin.setValue("Default");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
