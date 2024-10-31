@@ -1,9 +1,9 @@
 <h1>CalculatorV2</h1>
 
-<div class="images--container" style="text-align:center">
-<img class="images" src="img/defaultModeCalc.png" alt="Default Calc Image" height="450" style="border: 10px solid black"> </img>
-<img class="images" src="img/darkModeCalc.png" alt="Dark Calc Image" height="450"> </img>
-<img class="images" src="img/lightModeCalc.png" alt="Light Calc Image" height="450"> </img>
+<div style="text-align:center; display:flex; gap:10px">
+<img style="border:10px solid black;" src="img/defaultModeCalc.png" alt="Default Calc Image" height="523"> </img>
+<img style="border:10px solid black;" src="img/darkModeCalc.png" alt="Dark Calc Image" height="450"> </img>
+<img style="border:10px solid black;" src="img/lightModeCalc.png" alt="Light Calc Image" height="450"> </img>
 </div>
 
 <h2>Overview</h2>
@@ -51,13 +51,4 @@ or run the generated .exe file
 
 <br>
 This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3.
-<style>
-.images--container {
-display:flex;
-gap:10px;
-}
-.images {
-border: 10px solid black;
-padding-top:-40px;
-}
-</style>
+
