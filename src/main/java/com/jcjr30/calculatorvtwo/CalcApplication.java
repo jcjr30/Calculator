@@ -25,8 +25,11 @@ public class CalcApplication extends Application {
         else {
             scene = new Scene(fxmlLoader.load(), 300, 525);
         }
-        Font.loadFont(getClass().getResource("fonts/dsdigital.TTF").toExternalForm(), 16);
-        Font.loadFont(getClass().getResource("fonts/SourceSansPro-Semibold.otf").toExternalForm(), 16);
+            loadFontIfPresent("fonts/dsdigital.TTF", 64);
+            loadFontIfPresent("fonts/SourceSansPro-Semibold.otf", 64);
+            loadFontIfPresent("fonts/SourceSansPro-Light.otf", 64);
+
+
 
         stage.setTitle("Calculator");
         stage.setScene(scene);
@@ -35,5 +38,16 @@ public class CalcApplication extends Application {
 
     public static void setInitLayout(String layout) {
         initLayout = layout;
+    }
+    public static void loadFontIfPresent(String fontPath, int size)  {
+        try {
+            if (Font.loadFont(CalcApplication.class.getResource(fontPath).toExternalForm(), size) != null) {
+                System.out.println("Font loaded: " + fontPath);
+            } else {
+                System.out.println("Font not found: " + fontPath);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Resource not found: " + fontPath);
+        }
     }
 }
