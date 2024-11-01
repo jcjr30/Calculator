@@ -47,17 +47,18 @@ Enter -> Equals
 
 <code>cd Calculator</code>
 
-<h3>Build the project using Maven:</h3> 
-
-<code>mvn clean package</code>
-
 <h3>To run the application, use the following Maven command:</h3>
 
 <code>mvn javafx:run </code>
 
-or run the generated .exe file (target/CalculatorV2.exe)
+<br>
 
-The .exe is portable, it will generate a "data" folder in its' directory.
+<h3>To create a portable version, use the following Maven command:</h3>
+
+<code>mvn javafx:jlink</code>
+
+<h3>Then run the generated .bat file (target/app/bin/app.bat)</h3>
+
 
 <br>
 This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3.
