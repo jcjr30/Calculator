@@ -12,7 +12,7 @@
 
 <h2>Overview</h2>
 
-CalculatorV2 is a JavaFX-based calculator application that supports basic and scientific calculations. The project is structured to offer a clean, responsive user interface with themes and two seperate layouts.
+CalculatorV2 is a JavaFX-based calculator application that supports basic and scientific calculations. The project is meant to offer a clean, responsive user interface with themes and two seperate layouts.
 
 <h3>Features</h3>
 
