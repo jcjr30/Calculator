@@ -40,3 +40,4 @@ build/
 /src/main/resources/META-INF/MANIFEST.MF
 /out/artifacts/CalculatorV2_jar/CalculatorV2.jar
 /data/
+/src/main/resources/com/jcjr30/calculatorvtwo/jre/jdk-23/
