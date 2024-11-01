@@ -84,10 +84,12 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
+                            <stripDebug>true</stripDebug>
                             <mainClass>com.jcjr30.calculatorvtwo/com.jcjr30.calculatorvtwo.Main</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
+                            <launcher>CalculatorV2</launcher>
+                            <jlinkZipName>CalculatorV2</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
+
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
@@ -95,6 +97,34 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>io.github.fvarrui</groupId>
+                <artifactId>javapackager</artifactId>
+                <version>1.7.6</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <configuration>
+                            <!-- mandatory -->
+                            <mainClass>com.jcjr30.calculatorvtwo.Main</mainClass>
+                            <!-- optional -->
+                            <bundleJre>true</bundleJre>
+                            <generateInstaller>true</generateInstaller>
+                            <administratorRequired>false</administratorRequired>
+                            <platform>windows</platform>
+                            <winConfig>
+                                <icoFile>${basedir}/assets/windows/CalculatorV2.ico</icoFile>
+                                <headerType>gui</headerType>
+                            </winConfig>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
     </plugins>
     </build>
 </project>

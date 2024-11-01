@@ -30,8 +30,6 @@ public class CalcApplication extends Application {
             loadFontIfPresent("fonts/SourceSansPro-Semibold.otf", 64);
             loadFontIfPresent("fonts/SourceSansPro-Light.otf", 64);
 
-
-
         stage.setTitle("Calculator");
         stage.setScene(scene);
         stage.show();

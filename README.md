@@ -37,28 +37,35 @@ Enter -> Equals
 - <a href="https://www.dafont.com/ds-digital.font">DS-Digital</a> (Included in repo, Original Author: Dusit Supasawat)
 - Adobe Source Sans Pro (Light/Semi-Bold)
 
-<h2>Steps to run:</h2>
+<h1>Steps to run:</h1>
 
-<h3>Clone the repository:</h3>
+<h2>1. Clone the repository:</h2>
 
 <code>git clone https://github.com/jcjr30/Calculator.git</code>
 
-<h3>Navigate to the project directory:</h3> 
+<h2>2. Navigate to the project directory:</h2> 
 
 <code>cd Calculator</code>
 
-<h3>To run the application, use the following Maven command:</h3>
+<h2>3. Pick one of the following ways to run the app:</h2>
+
+<h3>To simply run the application:</h3>
 
 <code>mvn javafx:run </code>
 
-<br>
-
-<h3>To create a portable version, use the following Maven command:</h3>
+<h3>To create a portable .bat version (~94 mb):</h3>
 
 <code>mvn javafx:jlink</code>
 
-<h3>Then run the generated .bat file (target/app/bin/app.bat)</h3>
+Then run the generated .bat file (target/app/bin/CalculatorV2.bat)
 
+<h3>To create a portable .exe version (~82 mb):</h3>
+
+<code>mvn clean package</code>
+
+Then run the generated .exe file (target/CalculatorV2/CalculatorV2.exe)
+
+<h3>This project uses <a href="https://github.com/fvarrui/JavaPackager">JavaPackager</a> to create the .exe</h3>
 
 <br>
 This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3.
